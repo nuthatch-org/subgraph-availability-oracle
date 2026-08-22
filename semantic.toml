@@ -1,0 +1,87 @@
+# semantic.toml - what this nest's data *means* (RFC-0016). Read by the MCP `schema`
+# tool, the admin UI, and the scaffolded skill. Edit descriptions freely; the
+# `[table.*.footguns]` are DERIVED from the ABI and regenerated - leave them be.
+
+schema_version = 1
+
+[nest]
+description = "The `subgraph-availability-oracle` nest on arbitrum-one. (seeded from the ABI - edit semantic.toml to improve this)"
+
+[table.oracle__new_ownership]
+description = "`NewOwnership(address,address)` events emitted by the `oracle` contract. (seeded from the ABI - edit semantic.toml to improve this)"
+grain = "one row per NewOwnership(address,address) event"
+
+[table.oracle__new_ownership.columns]
+from = "The `from` address parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+to = "The `to` address parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+
+[table.oracle__new_ownership.footguns]
+reserved_words = [
+    "from",
+    "to",
+]
+
+[table.oracle__new_pending_ownership]
+description = "`NewPendingOwnership(address,address)` events emitted by the `oracle` contract. (seeded from the ABI - edit semantic.toml to improve this)"
+grain = "one row per NewPendingOwnership(address,address) event"
+
+[table.oracle__new_pending_ownership.columns]
+from = "The `from` address parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+to = "The `to` address parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+
+[table.oracle__new_pending_ownership.footguns]
+reserved_words = [
+    "from",
+    "to",
+]
+
+[table.oracle__oracle_set]
+description = "`OracleSet(uint256,address)` events emitted by the `oracle` contract. (seeded from the ABI - edit semantic.toml to improve this)"
+grain = "one row per OracleSet(uint256,address) event"
+
+[table.oracle__oracle_set.columns]
+index = "The `index` uint256 parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+oracle = "The `oracle` address parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+
+[table.oracle__oracle_set.footguns]
+reserved_words = ["index"]
+big_ints = ["index"]
+overflows_dec = ["index"]
+
+[table.oracle__oracle_vote]
+description = "`OracleVote(bytes32,bool,uint256,uint256)` events emitted by the `oracle` contract. (seeded from the ABI - edit semantic.toml to improve this)"
+grain = "one row per OracleVote(bytes32,bool,uint256,uint256) event"
+
+[table.oracle__oracle_vote.columns]
+deny = "The `deny` bool parameter - stored as exact text `'true'`/`'false'`, not a SQL boolean. `deny = true` and `AND`/`NOT` implicitly cast and work; `COALESCE`, `CASE`, `bool_and`/`bool_or` and `UNION` do not. Write `deny = 'true'` or `CAST(deny AS BOOLEAN)`. (seeded from the ABI - edit semantic.toml to improve this)"
+oracleIndex = "The `oracleIndex` uint256 parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+subgraphDeploymentID = "The `subgraphDeploymentID` bytes32 parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+timestamp = "The `timestamp` uint256 parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+
+[table.oracle__oracle_vote.footguns]
+big_ints = [
+    "oracleIndex",
+    "timestamp",
+]
+overflows_dec = [
+    "oracleIndex",
+    "timestamp",
+]
+bools = ["deny"]
+
+[table.oracle__vote_time_limit_set]
+description = "`VoteTimeLimitSet(uint256)` events emitted by the `oracle` contract. (seeded from the ABI - edit semantic.toml to improve this)"
+grain = "one row per VoteTimeLimitSet(uint256) event"
+
+[table.oracle__vote_time_limit_set.columns]
+voteTimeLimit = "The `voteTimeLimit` uint256 parameter. (seeded from the ABI - edit semantic.toml to improve this)"
+
+[table.oracle__vote_time_limit_set.footguns]
+big_ints = ["voteTimeLimit"]
+overflows_dec = ["voteTimeLimit"]
+
+[view]
+
+# Authored views (views/*.sql) are described here so the MCP/`/schema` can render them:
+# [view.your_view_name]
+# description = "What this derivation computes."

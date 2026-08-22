@@ -1,0 +1,6 @@
+# nuthatch runtime state - never commit; a nest is source-only
+nuthatch.redb
+nuthatch.redb.*
+segments/
+data/
+*.log

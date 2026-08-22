@@ -1,0 +1,26 @@
+[nest]
+name = "subgraph-availability-oracle"
+chain = "arbitrum-one"
+chain_id = 42161
+# A keyless public endpoint, so this file is publishable: `nuthatch.toml` is pinned into the nest's
+# content address and must never carry a credential.
+rpc_urls = [
+    "https://arb1.arbitrum.io/rpc",
+]
+schema_version = 1
+block_timestamps = true
+
+# The Subgraph Availability Oracle: the contract `RewardsManager.subgraphAvailabilityOracle()` points
+# at. Oracles vote on whether a subgraph deployment is available, and denied deployments stop accruing
+# indexing rewards - so this is the voting record behind who gets paid for serving what.
+#
+# NOT the same thing as the `qos-reo` catalogue entry, and it does not replace it. That entry wants
+# GIP-0079's Rewards Eligibility Oracle, which is undeployed - `rewardsEligibilityOracle()` reverts on
+# both SubgraphService and RewardsManager (probed 2026-08-22) - plus gateway quality-of-service
+# telemetry, which is published off-chain and which no contract emits. This is the one part of that
+# neighbourhood that exists on-chain today.
+[[contracts]]
+alias = "oracle"
+address = "0x1cb555359319a94280acf85372ac2323aae2f5fd"
+start_block = 223974980
+abi = "abis/oracle.json"
