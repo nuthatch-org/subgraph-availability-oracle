@@ -1,6 +1,6 @@
 # subgraph-availability-oracle
 
-A [nuthatch](https://github.com/nightswatchhq/nuthatch) nest: **The Graph's Subgraph Availability Oracle on Arbitrum**.
+A [nuthatch](https://github.com/nuthatch-org/nuthatch) nest: **The Graph's Subgraph Availability Oracle on Arbitrum**.
 
 Oracles vote on whether a subgraph deployment is available. A deployment the oracles deny stops accruing indexing rewards, so this is the voting record behind who gets paid for serving what.
 
@@ -48,7 +48,7 @@ This is the one part of that neighbourhood that exists on-chain today.
 ## Run it
 
 ```sh
-nuthatch init --from https://github.com/nightswatchhq/subgraph-availability-oracle
+nuthatch init --from https://github.com/nuthatch-org/subgraph-availability-oracle
 cd subgraph-availability-oracle
 nuthatch dev --dir . --backfill 2000000 --seal-direct --window 20000
 nuthatch sql --dir . "SELECT * FROM denials"
